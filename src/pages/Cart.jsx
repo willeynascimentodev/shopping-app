@@ -1,19 +1,21 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect } from "react"
 import CartContext from "../context/CartContext"
 import ProductContext from "../context/ProductContext"
-import Product from "./Product"
 import CartItem from "../components/CartItem"
 import Header from "../components/Header"
 import Nav from "../components/Nav"
 import { FaAngleRight } from 'react-icons/fa'
 import { useNavigate } from "react-router-dom"
-import Loading from "../components/Loading"
 
 
 function Cart() {
 
-  const { totalPrice, cart } = useContext(CartContext)
+  const { totalPrice, cart, totalPriceCalc } = useContext(CartContext)
   const navigate = useNavigate()
+
+  useEffect(() => {
+    totalPriceCalc()
+  })
 
   return (
     <>

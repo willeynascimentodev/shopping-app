@@ -5,7 +5,6 @@ import ProductContext from '../context/ProductContext'
 function CartItem({ item }) {
 
     const { updateItem } = useContext(CartContext)
-    const { products, product, getProduct } = useContext(ProductContext)
     const [amount, setAmount] = useState(item.amount)
 
     const incDecAmount = (value) => {
@@ -21,14 +20,14 @@ function CartItem({ item }) {
     return (
         <div className='item-cart'>
             <div className='item-cart-img'>
-                {/* <img src={ product.img[0] } alt="imagem" /> */}
+                <img src={ item.img } alt="" />
             </div>
             <div className='item-cart-info'>
                 <div className="item-cart-name">
-                    { product.name }
+                    { item.name }
                 </div>
                 <div className='item-cart-price'>
-                    { product.price }
+                    { item.price }
                 </div>
                 <div className='item-cart-btns'>
                     <button

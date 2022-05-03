@@ -5,25 +5,23 @@ import ProductContext from "./ProductContext"
 const CartContext = createContext()
 
 export const CartProvider = ({ children }) => {
-    const [loading, setLoading] = useState(true)
     const [productsList, setProducts] = useState(0)
     const [cart, setCart] = useState([])
     const [totalPrice, setTotalPrice] = useState(0)
-    const { products } = useContext(ProductContext)
-    
-
-    
+    const { products, loading } = useContext(ProductContext)
 
     const cartStorage = JSON.parse(localStorage.getItem('cart'))
 
-    useEffect ( () => {
+    useEffect (() => {
+        setProducts(cart.length)
         if(cartStorage !== null) {
             setCart(cartStorage)
         } else {
             localStorage.setItem('cart', JSON.stringify([]))
         }
-        setProducts(cart.length)
-        totalPriceCalc()
+        if(!loading) {
+            totalPriceCalc()
+        }
 
     }, [])
 
@@ -33,10 +31,11 @@ export const CartProvider = ({ children }) => {
 
     const totalPriceCalc = () => {
         var price = 0
+        
         getCartStorage().map((item) =>{
-          
           if(products.length > 0) {
-            var prod = products?.filter((product) => product.id == item.product_id+"")
+            var prod = products.filter((product) => product.id == item.product_id+"")
+            
             var prodPrice = prod[0].price
             prodPrice = prodPrice.replace(" ", "")
             prodPrice = prodPrice.replace("$", "")
@@ -50,8 +49,7 @@ export const CartProvider = ({ children }) => {
         })
         
         var total = price.toLocaleString('en',{style: 'currency', currency: 'USD'});
-        
-        setTotalPrice(total)
+        setTotalPrice(total) 
         
     }
 
@@ -62,14 +60,17 @@ export const CartProvider = ({ children }) => {
         totalPriceCalc()
     }
 
-    const addItem = (id) => {
+    const addItem = (item) => {
         const data = {
-            product_id: id,
+            product_id: item.id,
+            name: item.name,
             amount: 1,
+            price: item.price,
+            img: item.img[0]
         
         }
         
-        if (getItem(id).length == 0) {
+        if (getItem(item.id).length == 0) {
             setItem(data)
         }   
         setProducts(cart.length)
@@ -84,7 +85,7 @@ export const CartProvider = ({ children }) => {
                 deleteItem(id)
             } else {
                 data.amount = newAmount
-                const resp = cart.filter((item) => item.product_id !== id+"")
+                const resp = cart.filter((item) => item.product_id != id+"")
                 resp.push(data)
                 setCart([])
                 setCart(resp)
@@ -96,11 +97,11 @@ export const CartProvider = ({ children }) => {
     }
 
     const getItem = (id) => {
-        return cart.filter((item) => item.product_id === id+"")
+        return cart.filter((item) => item.product_id == id+"")
     }
 
     const deleteItem = (id) => {
-        const data = cart.filter((item) => item.product_id !== id+"")
+        const data = cart.filter((item) => item.product_id != id+"")
         setCart(data)
         localStorage.setItem('cart', JSON.stringify(data))
         setProducts(cart.length)
@@ -114,7 +115,8 @@ export const CartProvider = ({ children }) => {
         deleteItem,
         cart,
         productsList,
-        totalPrice
+        totalPrice,
+        totalPriceCalc
     }}>
         { children }
     </CartContext.Provider>

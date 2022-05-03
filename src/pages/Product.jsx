@@ -21,7 +21,7 @@ function Product() {
   }, [])
   
   const addToCart = () => {
-    addItem(productId)
+    addItem(product)
   }
 
   const removeFromCart = () => {
