@@ -1,9 +1,10 @@
 import React from 'react'
+import logo from '../assets/img/logo.jpg'
 
 function Loading() {
   return (
-    <div>
-      <p>Loading...</p>
+    <div class='loading'>
+      <img src={ logo } alt="" />
     </div>
   )
 }

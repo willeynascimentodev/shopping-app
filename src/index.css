@@ -470,3 +470,16 @@ code {
   position: absolute;
   float: center;
 }
+
+.loading {
+  background-color: #2E3746;
+  min-height: 100vh;
+  text-align: center;
+  
+  justify-content: center;
+}
+
+.loading img {
+  margin-top: 50%;
+  width: 300px;
+}
