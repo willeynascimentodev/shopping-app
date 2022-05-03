@@ -10,12 +10,17 @@ import { useNavigate } from "react-router-dom"
 
 function Cart() {
 
-  const { totalPrice, cart, totalPriceCalc } = useContext(CartContext)
+  const { totalPrice, cart, totalPriceCalc, clearCart } = useContext(CartContext)
   const navigate = useNavigate()
 
   useEffect(() => {
     totalPriceCalc()
   })
+
+  const checkout = () => {
+    clearCart()
+    navigate('/order-placed')
+  }
 
   return (
     <>
@@ -38,7 +43,7 @@ function Cart() {
     </div>
 
     <button  
-        onClick={ () => navigate('/order-placed')  }
+        onClick={ checkout  }
         className='btn-right btn btn-pri'
       >
         CHECKOUT 

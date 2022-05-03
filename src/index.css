@@ -461,3 +461,12 @@ code {
 .rounded-blue img {
   margin-top: 35px;
 }
+
+.logo {
+  display: inline-block;
+  margin-top: 13px;
+  margin-left: 10px;
+  width: 160px;
+  position: absolute;
+  float: center;
+}

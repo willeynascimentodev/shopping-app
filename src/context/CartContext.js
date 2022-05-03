@@ -107,6 +107,11 @@ export const CartProvider = ({ children }) => {
         setProducts(cart.length)
         totalPriceCalc()
     }
+
+    const clearCart = () => {
+        setCart([])
+        localStorage.setItem('cart', JSON.stringify([]))
+    }
     
     return <CartContext.Provider value={{
         addItem,
@@ -116,7 +121,8 @@ export const CartProvider = ({ children }) => {
         cart,
         productsList,
         totalPrice,
-        totalPriceCalc
+        totalPriceCalc,
+        clearCart
     }}>
         { children }
     </CartContext.Provider>

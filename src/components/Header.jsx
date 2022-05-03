@@ -3,6 +3,7 @@ import { BsBell } from 'react-icons/bs'
 import { FaRegComment, FaShoppingCart, FaAngleLeft } from 'react-icons/fa'
 import { useLocation, useNavigate } from 'react-router-dom'
 import CartContext from '../context/CartContext'
+import logo from '../assets/img/logo.jpg'
 
 function Header() {
     
@@ -21,17 +22,19 @@ function Header() {
     
     return (
         <div className="header">
-            
-            { pathMatchRoute('/order-placed', true) ? ( <FaAngleLeft onClick={ () => navigate('/cart') } className='left-0 icons'/> ) : null}
+            { pathMatchRoute('/order-placed', true)  ? ( <FaAngleLeft onClick={ () => navigate('/cart') } className='left-0 icons'/> ) : null}
             { pathMatchRoute('/product/', false) ? (  <FaAngleLeft onClick={ () => navigate('/') } className='left-0 icons'/> ) : null}
 
-            { pathMatchRoute('/', true) ? ( <BsBell className='icons right'/> ) : null}
-            { pathMatchRoute('/', true) ? ( <FaRegComment className="icons right" /> ) : null}
+            <img className="logo" src={ logo } alt="" />
 
-            { pathMatchRoute('/cart', true) ? ( <BsBell className='icons right'/> ) : null}
-            { pathMatchRoute('/cart', true) ? ( <FaRegComment className="icons right" /> ) : null}
+            { pathMatchRoute('/', true) ? ( <BsBell onClick={ () => navigate('/ops/notifications') } className='icons right'/> ) : null}
+            { pathMatchRoute('/', true) ? ( <FaRegComment onClick={ () => navigate('/ops/messages') } className="icons right" /> ) : null}
+
+            { pathMatchRoute('/cart', true) ? ( <BsBell onClick={ () => navigate('/ops/notifications') } className='icons right'/> ) : null}
+            { pathMatchRoute('/cart', true) ? ( <FaRegComment onClick={ () => navigate('/ops/messages') } className="icons right" /> ) : null}
             
             { pathMatchRoute('/product/', false) ? ( 
+                
                 <span onClick={ () => navigate('/cart') } className='icons right'>
                     <FaShoppingCart />
                     <span className="amount">

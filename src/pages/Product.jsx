@@ -7,6 +7,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import SwiperCore, {Navigation, Pagination, Scrollbar, A11y} from 'swiper'
 import { FaAngleRight, FaAngleUp, FaAngleLeft } from 'react-icons/fa'
+import { toast } from 'react-toastify'
+
+
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y])
 
 function Product() {
@@ -21,11 +24,21 @@ function Product() {
   }, [])
   
   const addToCart = () => {
-    addItem(product)
+    try {
+      addItem(product)
+      toast.success('Product added to cart')
+    } catch (e) {
+      toast.success('Something went wrong')
+    }
   }
 
   const removeFromCart = () => {
-    deleteItem(productId)
+    try {
+      deleteItem(productId)
+      toast.success('Product removed from cart')
+    } catch (e) {
+      toast.success('Something went wrong')
+    }
   }
     
   const shareLink = () => {
