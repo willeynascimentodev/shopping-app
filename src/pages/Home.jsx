@@ -25,8 +25,8 @@ function Home() {
         <Categories />
         <SliderBanner />
         <ProductsList />
-        <Nav />
       </div>
+      <Nav />
     </>
   )
 }
