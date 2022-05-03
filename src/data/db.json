@@ -1,0 +1,24 @@
+{
+    "products": [
+        {
+            "id": 1,
+            "name": "Lenovo - IdeaPad L340 15 Gaming",
+            "price": "$ 717,80",
+            "description": "Descrição"
+        },
+    
+        {
+            "id": 2,
+            "name": "Lenovo - 15.6' ThinkPad P15s Gen 1",
+            "price": "$ 1,519.00",
+            "description": "Descrição"
+        },
+    
+        {
+            "id": 3,
+            "name": "Notebook Lenovo 2 em 1",
+            "price": "$ 4,699.00",
+            "description": "Descrição"
+        }
+    ]
+}
